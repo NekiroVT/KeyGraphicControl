@@ -1,0 +1,56 @@
+plugins {
+    alias(libs.plugins.android.application)
+    // Mantén las dependencias que ya tenías
+}
+
+android {
+    namespace 'utilsolu.keygraphiccontrol'
+    // 1. Usaremos compileSdk 34 (Android 14) o superior, que incluye API 33.
+    // Usar 34 es seguro, ya que 36 podría no existir en tu setup.
+    compileSdk 34
+
+    defaultConfig {
+        applicationId "utilsolu.keygraphiccontrol"
+
+        // 2. minSdk: 24 (Android 7.0) es excelente para máxima compatibilidad.
+        minSdk 24
+
+        // 3. targetSdk: 33 (Android 13) coincide EXACTAMENTE con tu celular,
+        // o 34 (la última) es la mejor práctica. Usaremos 34, que abarca 33.
+        targetSdk 34
+
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    // ==========================================================
+    // CONFIGURACIÓN CLAVE PARA JAVA 21
+    // ==========================================================
+    compileOptions {
+        // [CORRECCIÓN] Para Java 21, la sintaxis moderna en compileOptions es:
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
+    // ==========================================================
+}
+
+dependencies {
+
+    implementation libs.appcompat
+    implementation libs.material
+    // Mantén la dependencia de ConstraintLayout
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    implementation "androidx.core:core-splashscreen:1.0.1"
+    testImplementation libs.junit
+    androidTestImplementation libs.ext.junit
+    androidTestImplementation libs.espresso.core
+}
